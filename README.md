@@ -1,1 +1,2 @@
-Soon to be updated
+I use iterm2 on  macosx, and this is my current setup using nvim, tmux, and zsh. Many thanks to 
+Nick Nisi for his amazing work putting together a very well documented README so that I could begin to travel down this rabbit hole of vim and customizations--there have been many before me and there will surely be more to follow. For those who have yet to follow, don't initially get discouraged by vim in a world of modern IDE's, because all good things come in time.
