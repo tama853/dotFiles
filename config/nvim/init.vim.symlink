@@ -17,7 +17,7 @@ Plugin 'nicknisi/vim-base16-lightline'
 Plugin 'https://github.com/majutsushi/tagbar'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/syntastic'
+""Plugin 'scrooloose/syntastic'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'benmills/vimux'
 call vundle#end()
@@ -216,20 +216,20 @@ set directory=~/.vim/_swap/      " where to put swap files.
 "#######################################################################
 "Syntastic stuff##########                                             |
 "#######################################################################
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
+"let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
 ""let g:syntastic_cpp_checkers = ['clang'] "c++
 
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 ""let g:syntastic_cpp_checkers = ['gcc'] "c++
 "#######################################################################
 "#######################################################################

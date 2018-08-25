@@ -294,7 +294,7 @@
                 }
             ],
             "name": "Default",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
@@ -316,7 +316,7 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "v",
+                                    "key_code": "f",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -338,7 +338,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "x",
+                                    "key_code": "s",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -360,29 +360,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "z",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "slash",
-                                        "modifiers": [
-                                            "left_command"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "c",
+                                    "key_code": "d",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -684,7 +662,7 @@
                 }
             ],
             "name": "Dvorak",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "country_code": 0
