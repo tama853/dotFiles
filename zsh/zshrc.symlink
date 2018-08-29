@@ -5,6 +5,7 @@ export ZSH=$DOTFILES/zsh
 
 # Path to oh-my-zsh installation.
 export ZSH="/Users/tama853/.oh-my-zsh"
+#export PATH=/usr/local/Cellar/mysql/8.0.12/bin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # add /usr/local/sbin
