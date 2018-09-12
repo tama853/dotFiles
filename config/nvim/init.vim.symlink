@@ -1,6 +1,5 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'  
@@ -147,7 +146,7 @@ nnoremap <Leader>, <C-w>
 
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
-nnoremap <C-I><C-I> :wa<cr>
+nnoremap <C-I><C-I> :wa <CR>| !clang % -o % <CR>
 
 nnoremap <S-w> $
 nnoremap <S-b> 0
