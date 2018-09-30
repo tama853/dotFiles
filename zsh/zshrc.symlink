@@ -82,6 +82,7 @@ ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -90,17 +91,11 @@ export EDITOR='nvim'
 # export LANG=en_US.UTF-8
 
 #Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
-
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
-else
-    export TERM=tmux-256color-italic
-fi
+#if [[ -n $SSH_CONNECTION ]]; then
+# export EDITOR='vim'
+#else
+# export EDITOR='vim'
+#fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -117,6 +112,7 @@ else
     export TERM=tmux-256color-italic
 fi
 
+##################### Alias ######################
 alias gcc='gcc-8'
 alias cc='gcc-8'
 alias g++='g++-8'
@@ -124,10 +120,17 @@ alias c++='c++-8'
 alias clang='clang++ -std=c++11 -stdlib=libc++'
 alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 
+alias programming='cd ~/Documents/Programming'
+
+alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
+alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
+
 alias vim='nvim'
 alias vi='nvim'
 alias tmux='tmux -2'
 alias ctags="`brew --prefix`/bin/ctags"
+####################################################
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
