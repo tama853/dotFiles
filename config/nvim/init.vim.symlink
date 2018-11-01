@@ -14,6 +14,11 @@ Plugin 'ervandew/supertab'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'nicknisi/vim-base16-lightline'
 Plugin 'https://github.com/majutsushi/tagbar'
+Plugin 'vimwiki/vimwiki'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 ""Plugin 'https://github.com/jaxbot/browserlink.vim'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
@@ -29,6 +34,10 @@ set rtp+=/usr/local/opt/fzf
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 let g:lightline = {'colorscheme': 'base16'}
+
+if has("gui_macvim")
+set guifont=Operator\ Mono\ Medium:h16
+endif
 
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_theme='powerlineish'
@@ -74,7 +83,7 @@ set foldlevel=1
 " Searching
 set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
-set hlsearch " highlight search results
+""set hlsearch " highlight search results
 set incsearch " set incremental search, like modern browsers
 set nolazyredraw " don't redraw while executing macros
 set magic " Set magic on, for regex
@@ -143,8 +152,9 @@ let mapleader = ','
 nnoremap <Leader>, <C-w>
 
 nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
 nnoremap <C-u> 3<C-u>
+nnoremap <C-y> 3<C-y>
+nnoremap <C-u> 3<C-y>
 
 "attempt at compiling and running when saved 
 "nnoremap <C-I><C-I> :wa <CR>| !clang % -o % <CR>
