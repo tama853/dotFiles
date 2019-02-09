@@ -19,11 +19,11 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-""Plugin 'https://github.com/jaxbot/browserlink.vim'
+"Plugin 'suoto/vim-hdl'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
-""Plugin 'scrooloose/syntastic'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'benmills/vimux'
 call vundle#end()
 
@@ -125,43 +125,41 @@ endif
 set termguicolors
 
 " Closing bracket function 
-inoremap ( ()<Esc>:call IDEStyleBraces(")")<CR>i
-inoremap { {<CR>}<Esc>:call IDEStyleBraces("}")<CR><Esc>kA<CR>
-inoremap [ []<Esc>:call IDEStyleBraces("]")<CR>i
-inoremap " ""<Esc>:call IDEStyleBraces("\"")<CR>i
-
-" jump out of parenthesis
-inoremap <C-j> <Esc>:call search(GetChar(), "W")<CR>a
-
-function! IDEStyleBraces(schar)
- if exists("b:var")
- let b:var = b:var . a:schar
- else
- let b:var = a:schar
- endif
-endfunction
-
-function! GetChar()
- let l:char = b:var[strlen(b:var) - 1]
- let b:var = strpart(b:var, 0, strlen(b:var) - 1)
- return l:char
-endfunction
+"inoremap ( ()<Esc>:call IDEStyleBraces(")")<CR>i
+"inoremap { {<CR>}<Esc>:call IDEStyleBraces("}")<CR><Esc>kA<CR>
+"inoremap [ []<Esc>:call IDEStyleBraces("]")<CR>i
+"inoremap " ""<Esc>:call IDEStyleBraces("\"")<CR>i
+"
+"" jump out of parenthesis
+"inoremap <C-j> <Esc>:call search(GetChar(), "W")<CR>a
+"
+"function! IDEStyleBraces(schar)
+" if exists("b:var")
+" let b:var = b:var . a:schar
+" else
+" let b:var = a:schar
+" endif
+"endfunction
+"
+"function! GetChar()
+" let l:char = b:var[strlen(b:var) - 1]
+" let b:var = strpart(b:var, 0, strlen(b:var) - 1)
+" return l:char
+"endfunction
 
 "###Keybindings###
 let mapleader = ','
 nnoremap <Leader>, <C-w>
 
-nnoremap <C-e> 3<C-e>
-nnoremap <C-u> 3<C-u>
+nnoremap <C-e> 3<C-d>
 nnoremap <C-y> 3<C-y>
-nnoremap <C-u> 3<C-y>
+nnoremap <C-u> 3<C-u>
+nnoremap <C-d> 3<C-d>
 
-"attempt at compiling and running when saved 
-"nnoremap <C-I><C-I> :wa <CR>| !clang % -o % <CR>
 noremap <C-I><C-I> :wa <CR>
 
-nnoremap <S-w> $
-nnoremap <S-b> 0
+"nnoremap <S-w> $
+"nnoremap <S-b> 0
 
 "let g:ctrlp_map = '<C-p>'
 
@@ -169,7 +167,6 @@ nnoremap <Leader>` :NERDTreeToggle<CR>
 nnoremap <Leader>~ :TagbarToggle<CR>
 
 nnoremap <Leader>a :buffers<CR>:buffer<Space>
-" nnoremap <Leader>l :ls<CR>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>g :e#<CR>
@@ -183,9 +180,6 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
-
- "nnoremap <C-w>Right <C-W>l
- "nnoremap <C-w>Left <C-W>h
 
 " ----------------------------------------------------------------------------
 " move to the window in the direction shown, or create a new split in that
@@ -228,21 +222,30 @@ set directory=~/.vim/_swap/      " where to put swap files.
 "#######################################################################
 "Syntastic stuff##########                                             |
 "#######################################################################
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-"let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
-""let g:syntastic_cpp_checkers = ['clang'] "c++
+let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
+let g:syntastic_cpp_checkers = ['clang'] "c++
 
-"let g:syntastic_cpp_compiler = 'clang++'
-"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-""let g:syntastic_cpp_checkers = ['gcc'] "c++
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_cpp_checkers = ['gcc'] "c++
+
+let g:syntastic_asm_compiler = "mipsel-linux-gcc"
+
+"Configure the project file
+""let g:vimhdl_conf_file = '<config/file>'
+
+"Tell Syntastic to use vim-hdl
+"let g:syntastic_vhdl_checkers = ['vimhdl']
+
 "#######################################################################
 "#######################################################################
 "let g:ctrlp_working_path_mode = 'ra'

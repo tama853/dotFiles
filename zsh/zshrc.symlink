@@ -122,7 +122,9 @@ alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 
 alias programming='cd ~/Documents/Programming'
 
-alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
+#alias v='nvim $(fzf)'
+
+#alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 
 alias vim='nvim'
