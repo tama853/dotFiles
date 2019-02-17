@@ -120,7 +120,13 @@ alias c++='c++-8'
 alias clang='clang++ -std=c++11 -stdlib=libc++'
 alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 
+
 alias programming='cd ~/Documents/Programming'
+alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
+alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
+alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
+alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
+alias dropbox='~/Dropbox'
 
 #alias v='nvim $(fzf)'
 
