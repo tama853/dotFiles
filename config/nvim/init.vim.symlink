@@ -1,4 +1,4 @@
-set rtp+=~/.vim/bundle/Vundle.vim
+	set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -19,11 +19,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'suoto/vim-hdl'
+Plugin 'suoto/vim-hdl'
+"Plugin 'shirk/vim-gas'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'benmills/vimux'
 call vundle#end()
 
@@ -39,6 +40,7 @@ if has("gui_macvim")
 set guifont=Operator\ Mono\ Medium:h16
 endif
 
+"hi def link AVR  <some_highlighting>
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_theme='powerlineish'
 "let g:bufferline_echo = 0
@@ -156,7 +158,8 @@ nnoremap <C-y> 3<C-y>
 nnoremap <C-u> 3<C-u>
 nnoremap <C-d> 3<C-d>
 
-noremap <C-I><C-I> :wa <CR>
+nnoremap <ESC><ESC> :wa <CR>
+"noremap <C-I><C-I> :wa <CR>
 
 "nnoremap <S-w> $
 "nnoremap <S-b> 0
@@ -222,23 +225,23 @@ set directory=~/.vim/_swap/      " where to put swap files.
 "#######################################################################
 "Syntastic stuff##########                                             |
 "#######################################################################
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
-let g:syntastic_cpp_checkers = ['clang'] "c++
+"let g:syntastic_python_checkers = ['flake8', 'pylint'] "python checkers
+"let g:syntastic_cpp_checkers = ['clang'] "c++
 
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_cpp_checkers = ['gcc'] "c++
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"let g:syntastic_cpp_checkers = ['gcc'] "c++
 
-let g:syntastic_asm_compiler = "mipsel-linux-gcc"
+"let g:syntastic_asm_compiler = "mipsel-linux-gcc"
 
 "Configure the project file
 ""let g:vimhdl_conf_file = '<config/file>'

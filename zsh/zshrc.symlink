@@ -113,10 +113,10 @@ else
 fi
 
 ##################### Alias ######################
-alias gcc='gcc-8'
-alias cc='gcc-8'
-alias g++='g++-8'
-alias c++='c++-8'
+#alias gcc='gcc-8'
+#alias cc='gcc-8'
+#alias g++='g++-8'
+#alias c++='c++-8'
 alias clang='clang++ -std=c++11 -stdlib=libc++'
 alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 
