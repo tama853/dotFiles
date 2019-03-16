@@ -1,12 +1,23 @@
-# If you come from bash you might have to change your $PATH.
-#export PATH="/usr/local/sbin:$PATH"
-export DOTFILES=$HOME/.dotfiles
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
 export ZSH=$DOTFILES/zsh
-
-# Path to oh-my-zsh installation.
+export DOTFILES=$HOME/.dotfiles
+export FZF_BASE="$HOME/.vim/bundle/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
-#export PATH=/usr/local/Cellar/mysql/8.0.12/bin:$PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+ZSH_THEME="dracula"
+DEFAULT_USER=`whoami`
+
+# OH_MY_ZSH Plugins
+plugins=(
+  fzf
+  git
+  osx
+  vi-mode
+)
+
+ZSH_DISABLE_COMPFIX=true
+source $ZSH/oh-my-zsh.sh
 
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin ]]; then
@@ -16,9 +27,93 @@ fi
 # add extra bin scripts
 export PATH=$DOTFILES/bin:$PATH
 
-ZSH_THEME="dracula"
-DEFAULT_USER=`whoami`
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 
+#########################################--ALIASES--###############################
+alias programming='cd ~/Documents/Programming'
+alias cc='gcc-8'
+alias gcc='gcc-8'
+alias g++='g++-8'
+alias c++='c++-8'
+
+alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
+alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
+alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
+alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
+alias dropbox='cd ~/Dropbox'
+
+alias clang='clang++ -std=c++11 -stdlib=libc++'
+
+alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
+alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
+
+alias vim='nvim'
+alias vi='nvim'
+alias tmux='tmux -2'
+alias ctags="`brew --prefix`/bin/ctags"
+
+alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
+#####################################################################################
+
+### FZF ###
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+#export PATH=/usr/local/Cellar/mysql/8.0.12/bin:$PATH
+
+# define default options
+#export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'  full version
+#export FZF_DEFAULT_COMMAND='rg --files --follow --glob "!.git/*"'  
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g"!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_OPTS="--inline-info"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
+--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
+
+#CTRL_T options
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+#ALT_C options
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# Defines options of FZF
+# for better solarized color theme
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
+#_gen_fzf_default_opts() {
+#  local base03="234"
+#  local base02="235"
+#  local base01="240"
+#  local base00="241"
+#  local base0="244"
+#  local base1="245"
+#  local base2="254"
+#  local base3="230"
+#  local yellow="136"
+#  local orange="166"
+#  local red="160"
+#  local magenta="125"
+#  local violet="61"
+#  local blue="33"
+#  local cyan="37"
+#  local green="64"
+#
+#  # Comment and uncomment below for the light theme.
+#
+#  # Solarized Dark color scheme for fzf
+#  export FZF_DEFAULT_OPTS="
+#    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+#    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+#  "
+#}
+#_gen_fzf_default_opts
+
+# shortcut to open FZF with selection result
+bindkey -s '^p' 'vim $(fzf)\n'
+
+### Functions ###
+# list directory after cd into it
 function cd()
 {
     new_directory="$*";
@@ -27,124 +122,20 @@ function cd()
     fi;
     builtin cd "${new_directory}" && ls -G
 }
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  osx
-  vi-mode
-)
-
-ZSH_DISABLE_COMPFIX=true
-source $ZSH/oh-my-zsh.sh
-
-export EDITOR='nvim'
-export GIT_EDITOR='nvim'
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 #Preferred editor for local and remote sessions
-#if [[ -n $SSH_CONNECTION ]]; then
-# export EDITOR='vim'
-#else
-# export EDITOR='vim'
-#fi
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-if [ -z "$TMUX" ]; then
-    export TERM=xterm-256color-italic
+if [[ -n $SSH_CONNECTION ]]; then
+    export TERM=xterm
 else
-    export TERM=tmux-256color-italic
+	if [ -z "$TMUX" ]; then
+		export TERM=xterm-256color-italic
+	else
+		export TERM=tmux-256color-italic
+	fi
 fi
 
-##################### Alias ######################
-#alias gcc='gcc-8'
-#alias cc='gcc-8'
-#alias g++='g++-8'
-#alias c++='c++-8'
-alias clang='clang++ -std=c++11 -stdlib=libc++'
-alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
-
-
-alias programming='cd ~/Documents/Programming'
-alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
-alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
-alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
-alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
-alias dropbox='~/Dropbox'
-
-#alias v='nvim $(fzf)'
-
-#alias j9="export JAVA_HOME=`/usr/libexec/java_home -v 9`; java -version"
-alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
-
-alias vim='nvim'
-alias vi='nvim'
-alias tmux='tmux -2'
-alias ctags="`brew --prefix`/bin/ctags"
 ####################################################
 
 fpath=(/usr/local/share/zsh-completions $fpath)
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export FZF_DEFAULT_OPTS="--extended"
-
-
