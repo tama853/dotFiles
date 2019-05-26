@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
+export PATH="/usr/local/bin:/usr/local/opt:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
 export ZSH=$DOTFILES/zsh
 export DOTFILES=$HOME/.dotfiles
 export FZF_BASE="$HOME/.vim/bundle/fzf"
@@ -37,10 +37,6 @@ alias gcc='gcc-8'
 alias g++='g++-8'
 alias c++='c++-8'
 
-alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
-alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
-alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
-alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
 alias dropbox='cd ~/Dropbox'
 
 alias clang='clang++ -std=c++11 -stdlib=libc++'
@@ -48,8 +44,6 @@ alias clang='clang++ -std=c++11 -stdlib=libc++'
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
 
-alias vim='nvim'
-alias vi='nvim'
 alias tmux='tmux -2'
 alias ctags="`brew --prefix`/bin/ctags"
 
@@ -83,8 +77,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 #export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
 #_gen_fzf_default_opts() {
 #  local base03="234"
-#  local base02="235"
-#  local base01="240"
+#  local base03="235"
+#  local base02="240"
 #  local base00="241"
 #  local base0="244"
 #  local base1="245"
@@ -134,8 +128,15 @@ else
 	fi
 fi
 
+
+
+# allows pyenv to change the python version automatically
+eval "$(pyenv init -)"
+
+
 ####################################################
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

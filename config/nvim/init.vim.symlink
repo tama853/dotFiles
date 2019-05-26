@@ -1,8 +1,6 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'kien/ctrlp.vim'  
-"Plugin 'wincent/command-t'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'scrooloose/nerdtree'  
@@ -20,8 +18,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'sheerun/vim-polyglot'
+""Plugin 'vim-airline/vim-airline'
+""Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
@@ -29,36 +28,36 @@ call vundle#end()
 "###Theme Stuff###
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
+let g:onedark_hide_endofbuffer = 1
 let g:lightline = {'colorscheme': 'base16'}
 
 if has("gui_macvim")
 set guifont=Operator\ Mono\ Medium:h16
 endif
 
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline_theme='powerlineish'
-"let g:bufferline_echo = 0
-
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='onedark'
+let g:bufferline_echo = 0										
 "###General###
 set history=1000
-set wrapmargin=8 " wrap lines when coming within n characters from side
-set linebreak " set soft wrapping
-set showbreak=… " show ellipsis at breaking
-set autoindent " automatically set indent of new line
-set ttyfast " faster redrawing
+set wrapmargin=8			" wrap lines when coming within n characters from side
+set linebreak				" set soft wrapping
+set showbreak=…				" show ellipsis at breaking
+set autoindent				" automatically set indent of new line
+set ttyfast					" faster redrawing
 set diffopt+=vertical
-set laststatus=2 " show the status line all the time:set nostartofline
-set scrolloff=7 " set 7 lines to the cursors - when moving vertical
-set wildmenu " enhanced command line completion
-set hidden " current buffer can be put into background
-set showcmd " show incomplete commands
-set noshowmode " don't show which mode disabled for PowerLine
-set wildmode=list:longest " complete files like a shell
+set laststatus=2			" show the status line all the time:set nostartofline
+set scrolloff=7				" set 7 lines to the cursors - when moving vertical
+set wildmenu				" enhanced command line completion
+set hidden					" current buffer can be put into background
+set showcmd					" show incomplete commands
+set noshowmode				" don't show which mode disabled for PowerLine
+set wildmode=list:longest	" complete files like a shell
 set shell=$SHELL
-set cmdheight=1 " command bar height
-set title " set terminal title
-set showmatch " show matching braces
-set mat=2 " how many tenths of a second to blink
+set cmdheight=1				" command bar height
+set title					" set terminal title
+set showmatch				" show matching braces
+set mat=2					" how many tenths of a second to blink
 
 " Tab control
 set textwidth=120
@@ -90,10 +89,10 @@ set noerrorbells
 set visualbell
 set t_vb=
 set tm=500
-
+							
 " toggle invisible characters
-set list
-set listchars=tab:→\ ,eol:¬,trail:·,extends:❯,precedes:❮,nbsp:+
+"set list
+"set listchars=tab:→\ ,eol:¬,trail:·,extends:❯,precedes:❮,nbsp:+
 set showbreak=↪
 set wrap
 set encoding=utf-8
@@ -106,44 +105,23 @@ set mouse=a
 set backspace=indent,eol,start
 set clipboard=unnamed
        
-let g:python2_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 
+"this may not be needed using tmux alias
 if &term =~ '256color'
 " disable background color erase
   set t_ut=
 endif
 
 " enable 24 bit color support if supported
-"if (has('mac') && empty($TMUX) && has("termguicolors"))
-"  set termguicolors
-"endif
+if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
 
-"same as above, but making sure it's on
-set termguicolors
-
-" Closing bracket function 
-"inoremap ( ()<Esc>:call IDEStyleBraces(")")<CR>i
-"inoremap { {<CR>}<Esc>:call IDEStyleBraces("}")<CR><Esc>kA<CR>
-"inoremap [ []<Esc>:call IDEStyleBraces("]")<CR>i
-"inoremap " ""<Esc>:call IDEStyleBraces("\"")<CR>i
-"
-"" jump out of parenthesis
-"inoremap <C-j> <Esc>:call search(GetChar(), "W")<CR>a
-"
-"function! IDEStyleBraces(schar)
-" if exists("b:var")
-" let b:var = b:var . a:schar
-" else
-" let b:var = a:schar
-" endif
-"endfunction
-"
-"function! GetChar()
-" let l:char = b:var[strlen(b:var) - 1]
-" let b:var = strpart(b:var, 0, strlen(b:var) - 1)
-" return l:char
-"endfunction
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 "###Keybindings###
 let mapleader = ','
@@ -162,6 +140,11 @@ nnoremap <S-b> 0
 nnoremap <Leader>` :NERDTreeToggle<CR>
 nnoremap <Leader>~ :TagbarToggle<CR>
 
+"  running scripts within vim
+nnoremap <Leader><C-r> :vsp <CR> :term python % <CR>
+nnoremap <Leader><C-w> :bd! <CR>
+
+
 nnoremap <Leader>a :buffers<CR>:buffer<Space>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>n :bn<CR>
@@ -177,49 +160,15 @@ nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
 
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-
 nnoremap <C-p> :Rg<Cr>
 nnoremap <C-f> :Files<Cr>
 
-"set grepprg=rg\ --vimgrep
+""set grepprg=rg\ --vimgrep
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-" ----------------------------------------------------------------------------
-" move to the window in the direction shown, or create a new split in that
-" direction
-" ----------------------------------------------------------------------------
-"func! WinMove(key)
-"    let t:curwin = winnr()
-"    exec "wincmd ".a:key
-"    if (t:curwin == winnr())
-"        if (match(a:key,'[jk]'))
-"            wincmd v
-"        else
-"            wincmd s
-"        endif
-"        exec "wincmd ".a:key
-"    endif
-"endfu
- 
-"nnoremap <silent> <C-h> :call WinMove('h')<cr>
-"nnoremap <silent> <C-t> :call WinMove('t')<cr>
-"nnoremap <silent> <C-c> :call WinMove('c')<cr>
-"nnoremap <silent> <C-n> :call WinMove('n')<cr>
-" --------------------------------------------------------------
 
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> {<C-w>Left} :TmuxNavigateLeft<cr>
@@ -243,40 +192,40 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gt :YcmCompleter GoToImplementationElseDeclaration<CR>
+
 " YouCompleteMe settings                                                        
-" youcompleteme                                                                 
-let g:ycm_collect_identifiers_from_comments_and_strings = 0                     
-"                                        
-let g:ycm_min_num_of_chars_for_completion=2                                     
-"                                         
-let g:ycm_cache_omnifunc=0                                                      
-"                                                          
-let g:ycm_seed_identifiers_with_syntax=1                                        
-"                                                      
+let g:ycm_collect_identifiers_from_comments_and_strings = 0                                                     
+let g:ycm_min_num_of_chars_for_completion=2                                                                       
+let g:ycm_cache_omnifunc=0                                                                                                           
+let g:ycm_seed_identifiers_with_syntax=1                                                                                         
 let g:ycm_complete_in_comments = 1                                                                                                  
 let g:ycm_complete_in_strings = 1                                               
 let g:ycm_autoclose_preview_window_after_completion = 1                         
 let g:ycm_autoclose_preview_window_after_insertion = 1                          
-"let g:ycm_filetype_whitelist = { 'python': 1 }                                  
-
-"nnoremap <Leader>T :YcmCompleter GoTo<CR>    
+"let g:ycm_filetype_whitelist = { 'python': 1 }                             
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-"let g:syntastic_cpp_checkers = ['clang']
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
+""let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_cpp_checkers = ['clang_check', 'gcc', 'avr-gcc', 'avrgcc']
+"let g:syntastic_avrgcc_config_file = avrgcc.py
+
 "#######################################################################
 "#######################################################################
 "
 let g:ycm_confirm_extra_conf=0
 let g:ycm_use_clangd = "Never"
-let g:ycm_collect_identifiers_from_tags_files = 1"
+let g:ycm_collect_identifiers_from_tags_files = 1
+""let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+
 "#######Tagbar############
 ""g:tagbar_autoclose
 
@@ -310,4 +259,3 @@ highlight Normal ctermbg=none
 
 "tells ctags where to look for tags file
 set tags=./tags;
-"set tags=/my/dir1/tags,/my/dir2/tags
