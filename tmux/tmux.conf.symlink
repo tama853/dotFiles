@@ -105,8 +105,8 @@ setw -g mode-keys vi
 #bind Escape copy-mode
 unbind p
 bind p paste-buffer
-#bind -Tcopy-mode-vi 'v' send -X begin-selection
-#bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind -Tcopy-mode-vi 'v' send -X begin-selection
+bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-selection
 
@@ -133,5 +133,5 @@ set -g default-command /usr/local/bin/zsh
 ###Color & Style Settings ###
 #############################
 
-source ~/dotfiles/tmux/theme.sh
-#source ~/dotfiles/tmux/base16.sh
+source ~/dotfiles/tmux/theme1.sh
+# source ~/dotfiles/tmux/base16.sh

@@ -1,9 +1,8 @@
 #### COLOUR
-
 tm_color_active=colour39
 tm_color_inactive=colour241
 tm_color_feature=colour170
-#tm_color_feature=colour206
+tm_color_feature=colour206
 tm_color_music=colour221
 tm_active_border_color=colour240
 
@@ -18,28 +17,30 @@ set -g status-right-length 150
 set -g status-interval 5
 
 # default statusbar colors
-# set-option -g status-bg colour0
-set-option -g status-fg $tm_color_active
+set-option -g status-format $tm_color_active
 set-option -g status-bg default
-set-option -g status-attr default
+set-option -g status-style default
 
 # default window title colors
-set-window-option -g window-status-fg $tm_color_inactive
-set-window-option -g window-status-bg default
-set -g window-status-format "#I #W"
+#set-window-option -g window-status-style $tm_color_inactive
+set-window-option -g window-status-style default
+set-window-option -g window-status-format "#I #W"
 
 # active window title colors
-set-window-option -g window-status-current-fg $tm_color_active
-set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-style $tm_color_active
+set-window-option -g window-status-current-style default
 set-window-option -g  window-status-current-format "#[bold]#I #W"
 
 # pane border
-set-option -g pane-border-fg $tm_color_inactive
-set-option -g pane-active-border-fg $tm_active_border_color
+#set-option -g pane-border-style $tm_color_inactive
+set-option -g pane-border-style default
+
+#set-option -g pane-active-border-style $tm_active_border_color
+set-option -g pane-active-border-style default
 
 # message text
-set-option -g message-bg default
-set-option -g message-fg $tm_color_active
+set-option -g message-style default
+#set-option -g message-style $tm_color_active
 
 # pane number display
 set-option -g display-panes-active-colour $tm_color_active

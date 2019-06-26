@@ -131,19 +131,18 @@ nnoremap <C-e> 5<C-d>
 nnoremap <C-u> 5<C-u>
 nnoremap <C-d> 5<C-d>
 
-nnoremap <ESC><ESC> :wa <CR>
-"noremap <C-I><C-I> :wa <CR>
+nnoremap <Leader><C-s> :wa <CR>
+"noremap <C-I><C-I> :wa <CR> tab version of saving
 
 nnoremap <S-w> $
 nnoremap <S-b> 0
 
-nnoremap <Leader>` :NERDTreeToggle<CR>
-nnoremap <Leader>~ :TagbarToggle<CR>
+nnoremap <Leader>` :TagbarToggle<CR>
+nnoremap <Leader>~ :NERDTreeToggle<CR>
 
 "  running scripts within vim
-nnoremap <Leader><C-r> :vsp <CR> :term python % <CR>
+nnoremap <Leader><C-r> :term python % <CR>
 nnoremap <Leader><C-w> :bd! <CR>
-
 
 nnoremap <Leader>a :buffers<CR>:buffer<Space>
 nnoremap <Leader>b :bp<CR>
@@ -162,6 +161,7 @@ nnoremap <Leader>0 :10b<CR>
 
 nnoremap <C-p> :Rg<Cr>
 nnoremap <C-f> :Files<Cr>
+"nnoremap <C-S-F> :FZF ~<Cr>
 
 ""set grepprg=rg\ --vimgrep
 
@@ -211,6 +211,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_enable_signs=1
+"highlight SyntasticErrorLine guibg=#550000
+"highlight SyntasticWarningLine guibg=#331d1e
 
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_cpp_compiler = 'clang++'
