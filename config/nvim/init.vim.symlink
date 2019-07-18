@@ -60,7 +60,7 @@ set mat=2					" how many tenths of a second to blink
 
 " Tab control
 set textwidth=120
-set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " insert spaced rather than tabs for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
