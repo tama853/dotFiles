@@ -21,7 +21,6 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'sheerun/vim-polyglot'
 ""Plugin 'vim-airline/vim-airline'
 ""Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
@@ -98,8 +97,7 @@ set wrap
 set encoding=utf-8
 scriptencoding utf-8
 set cursorline
-set number
-set noexpandtab   
+set number  
 set t_Co=256
 set mouse=a
 set backspace=indent,eol,start
@@ -127,15 +125,14 @@ endif
 let mapleader = ','
 nnoremap <Leader>, <C-w>
 
-nnoremap <C-e> 5<C-d>
+" Faster page scolling
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
 nnoremap <C-u> 5<C-u>
 nnoremap <C-d> 5<C-d>
 
 nnoremap <Leader><C-s> :wa <CR>
 "noremap <C-I><C-I> :wa <CR> tab version of saving
-
-nnoremap <S-w> $
-nnoremap <S-b> 0
 
 nnoremap <Leader>` :TagbarToggle<CR>
 nnoremap <Leader>~ :NERDTreeToggle<CR>
@@ -160,8 +157,8 @@ nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
 
 nnoremap <C-p> :Rg<Cr>
-nnoremap <C-f> :Files<Cr>
-"nnoremap <C-S-F> :FZF ~<Cr>
+nnoremap <C-F> :Files<Cr>
+"nnoremap <Leader><C-F> :FZF ~<Cr>
 
 ""set grepprg=rg\ --vimgrep
 
@@ -189,51 +186,38 @@ set directory=~/.vim/_swap/      " where to put swap files.
 "Syntastic stuff##########                                             |
 "#######################################################################
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gt :YcmCompleter GoToImplementationElseDeclaration<CR>
 
 " YouCompleteMe settings                                                        
 let g:ycm_collect_identifiers_from_comments_and_strings = 0                                                     
 let g:ycm_min_num_of_chars_for_completion=2                                                                       
 let g:ycm_cache_omnifunc=0                                                                                                           
-let g:ycm_seed_identifiers_with_syntax=1                                                                                         
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_register_as_syntastic_checker = 1
+
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
 let g:ycm_complete_in_comments = 1                                                                                                  
 let g:ycm_complete_in_strings = 1                                               
 let g:ycm_autoclose_preview_window_after_completion = 1                         
 let g:ycm_autoclose_preview_window_after_insertion = 1                          
 "let g:ycm_filetype_whitelist = { 'python': 1 }                             
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_enable_signs=1
-"highlight SyntasticErrorLine guibg=#550000
-"highlight SyntasticWarningLine guibg=#331d1e
-
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_cpp_compiler = 'clang++'
-""let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_cpp_checkers = ['clang_check', 'gcc', 'avr-gcc', 'avrgcc']
-"let g:syntastic_avrgcc_config_file = avrgcc.py
-
 "#######################################################################
 "#######################################################################
 "
 let g:ycm_confirm_extra_conf=0
-let g:ycm_use_clangd = "Never"
+let g:ycm_use_clangd = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_clangd_binary_path = ''
 ""let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 "#######Tagbar############
 ""g:tagbar_autoclose
 
-"
 " Colorscheme and final setup
     " This call must happen after the plug#end() call to ensure
     " that the colorschemes have been loaded
