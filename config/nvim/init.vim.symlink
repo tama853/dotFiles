@@ -6,21 +6,27 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'scrooloose/nerdtree'  
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-fugitive' 
-Plugin 'chriskempson/base16-vim'
-Plugin 'joshdick/onedark.vim'
 Plugin 'bling/vim-bufferline'
-Plugin 'itchyny/lightline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+
+" Theme
 Plugin 'nicknisi/vim-base16-lightline'
 Plugin 'https://github.com/majutsushi/tagbar'
+Plugin 'itchyny/lightline.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'joshdick/onedark.vim'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+
+" Note taking and format
 Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'sheerun/vim-polyglot'
-""Plugin 'vim-airline/vim-airline'
-""Plugin 'vim-airline/vim-airline-themes'
+
+" Sytax
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
@@ -73,6 +79,11 @@ set foldlevelstart=99
 set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
+
+" Spelling
+set spell spelllang=en_us
+" setlocal spell spelllang=en_us for local buffers
+" set spell = on | set nospell = off
 
 " Searching
 set ignorecase " case insensitive searching
@@ -160,7 +171,7 @@ nnoremap <C-p> :Rg<Cr>
 nnoremap <C-F> :Files<Cr>
 "nnoremap <Leader><C-F> :FZF ~<Cr>
 
-""set grepprg=rg\ --vimgrep
+set grepprg=rg\ --vimgrep
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
