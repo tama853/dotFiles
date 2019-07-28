@@ -1,4 +1,4 @@
-set -g default-command "login-shell"
+#set -g default-command "login-shell"
 
 # tmux display things in 256 colors
 set -g default-terminal "tmux-256color-italic"
@@ -20,8 +20,8 @@ bind C-a send-prefix
 bind-key a send-prefix
 
 # Activity Monitoring
-setw -g monitor-activity off
-set -g visual-activity off
+setw -g monitor-activity on
+set -g visual-activity on
 
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
@@ -105,8 +105,8 @@ setw -g mode-keys vi
 #bind Escape copy-mode
 unbind p
 bind p paste-buffer
-#bind -Tcopy-mode-vi 'v' send -X begin-selection
-#bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind -Tcopy-mode-vi 'v' send -X begin-selection
+bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-selection
 
@@ -134,4 +134,4 @@ set -g default-command /usr/local/bin/zsh
 #############################
 
 source ~/dotfiles/tmux/theme.sh
-#source ~/dotfiles/tmux/base16.sh
+# source ~/dotfiles/tmux/base16.sh

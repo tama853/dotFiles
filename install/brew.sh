@@ -9,41 +9,24 @@ echo -e "\\n\\nInstalling homebrew packages..."
 echo "=============================="
 
 formulas=(
-    ack
     bash-completion
-    diff-so-fancy
-    direnv
-    dnsmasq
-    fzf
     git
     gcc
     gdb
     gdbm
-    'grep --with-default-names'
-    highlight
-    hub
     htop
     hydra
     markdown
-    mas
     neovim/neovim/neovim
     node
     python
-    rbenv
     reattach-to-user-namespace
-    the_silver_searcher
-    shellcheck
     tmux
-    trash
     tree
     wget
     vim
-    z
     zsh
     ripgrep
-    git-standup
-    entr
-    zplug
 )
 
 for formula in "${formulas[@]}"; do

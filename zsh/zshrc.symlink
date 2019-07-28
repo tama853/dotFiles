@@ -1,9 +1,10 @@
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
-export ZSH=$DOTFILES/zsh
-export DOTFILES=$HOME/.dotfiles
+export PATH="/usr/local/bin:/usr/local/opt:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
+# export dotfiles=$HOME/dotfiles
+# export ZSH=$dotfiles/zsh
 export FZF_BASE="$HOME/.vim/bundle/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PYTHONPATH="~/Documents/Programming/UF_Research:$PYTHONPATH"
 
 ZSH_THEME="dracula"
 DEFAULT_USER=`whoami`
@@ -25,7 +26,7 @@ if [[ -d /usr/local/sbin ]]; then
 fi
 
 # add extra bin scripts
-export PATH=$DOTFILES/bin:$PATH
+export PATH=$dotfiles/bin:$PATH
 
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
@@ -37,10 +38,6 @@ alias gcc='gcc-8'
 alias g++='g++-8'
 alias c++='c++-8'
 
-alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
-alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
-alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
-alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
 alias dropbox='cd ~/Dropbox'
 
 alias clang='clang++ -std=c++11 -stdlib=libc++'
@@ -48,9 +45,7 @@ alias clang='clang++ -std=c++11 -stdlib=libc++'
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
 
-alias vim='nvim'
-alias vi='nvim'
-alias tmux='tmux -2'
+#  alias tmux='tmux -2'
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
@@ -64,7 +59,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 #export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'  full version
 #export FZF_DEFAULT_COMMAND='rg --files --follow --glob "!.git/*"'  
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g"!{.git,node_modules}/*" 2> /dev/null'
-export FZF_DEFAULT_OPTS="--inline-info"
+export FZF_DEFAULT_OPTS='--inline-info'
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
 --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
@@ -78,39 +73,8 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 #ALT_C options
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-# Defines options of FZF
-# for better solarized color theme
-#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS
-#_gen_fzf_default_opts() {
-#  local base03="234"
-#  local base02="235"
-#  local base01="240"
-#  local base00="241"
-#  local base0="244"
-#  local base1="245"
-#  local base2="254"
-#  local base3="230"
-#  local yellow="136"
-#  local orange="166"
-#  local red="160"
-#  local magenta="125"
-#  local violet="61"
-#  local blue="33"
-#  local cyan="37"
-#  local green="64"
-#
-#  # Comment and uncomment below for the light theme.
-#
-#  # Solarized Dark color scheme for fzf
-#  export FZF_DEFAULT_OPTS="
-#    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-#    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-#  "
-#}
-#_gen_fzf_default_opts
-
 # shortcut to open FZF with selection result
-bindkey -s '^p' 'vim $(fzf)\n'
+# bindkey -s '^p' 'vim $(fzf)\n'
 
 ### Functions ###
 # list directory after cd into it
@@ -134,8 +98,10 @@ else
 	fi
 fi
 
-####################################################
+# allows pyenv to change the python version automatically
+eval "$(pyenv init -)"
 
+####################################################
 fpath=(/usr/local/share/zsh-completions $fpath)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
