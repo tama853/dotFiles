@@ -133,5 +133,5 @@ set -g default-command /usr/local/bin/zsh
 ###Color & Style Settings ###
 #############################
 
-source ~/dotfiles/tmux/theme1.sh
+source ~/dotfiles/tmux/theme.sh
 # source ~/dotfiles/tmux/base16.sh
