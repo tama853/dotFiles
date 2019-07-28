@@ -1,8 +1,8 @@
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/home/tama853/intelFPGA_lite/18.1/quartus/bin:/home/tama853/intelFPGA_lite/18.1/modelsim_ase/linuxaloem"
 export ZSH=$DOTFILES/zsh
 export DOTFILES=$HOME/.dotfiles
 export FZF_BASE="$HOME/.vim/bundle/fzf"
-export ZSH="/Users/tama853/.oh-my-zsh"
+export ZSH="/home/tama853/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ZSH_THEME="dracula"
@@ -12,7 +12,6 @@ DEFAULT_USER=`whoami`
 plugins=(
   fzf
   git
-  osx
   vi-mode
 )
 
@@ -31,29 +30,10 @@ export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 
 #########################################--ALIASES--###############################
-alias programming='cd ~/Documents/Programming'
-alias cc='gcc-8'
-alias gcc='gcc-8'
-alias g++='g++-8'
-alias c++='c++-8'
-
-alias digital_design='cd ~/Documents/College/UF/2019/Spring/EEL4712'
-alias microp='cd ~/Documents/College/UF/2019/Spring/EEL3744'
-alias physics_ee='cd ~/Documents/College/UF/2019/Spring/EEL3008'
-alias comp_org='cd ~/Documents/College/UF/2019/Spring/CDA3101'
-alias dropbox='cd ~/Dropbox'
-
-alias clang='clang++ -std=c++11 -stdlib=libc++'
-
-alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
-alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
-
 alias vim='nvim'
 alias vi='nvim'
 alias tmux='tmux -2'
-alias ctags="`brew --prefix`/bin/ctags"
 
-alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 #####################################################################################
 
 ### FZF ###

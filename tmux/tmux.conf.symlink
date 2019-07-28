@@ -1,4 +1,4 @@
-set -g default-command "login-shell"
+#set -g default-command "login-shell"
 
 # tmux display things in 256 colors
 set -g default-terminal "tmux-256color-italic"
@@ -126,8 +126,8 @@ bind-key t new-window
 unbind q # I don't like having this power
 #bind-key q kill-session
 
-set -g default-shell /usr/local/bin/zsh
-set -g default-command /usr/local/bin/zsh
+#set -g default-shell /usr/local/bin/zsh
+#set -g default-command /usr/local/bin/zsh
 
 #############################
 ###Color & Style Settings ###
