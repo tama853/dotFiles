@@ -12,6 +12,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Theme
 Plugin 'nicknisi/vim-base16-lightline'
 Plugin 'https://github.com/majutsushi/tagbar'
+Plugin 'https://github.com/tpope/vim-obsession'
 Plugin 'itchyny/lightline.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'joshdick/onedark.vim'

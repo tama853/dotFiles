@@ -1,10 +1,10 @@
-export PATH="/usr/local/bin:/usr/local/opt:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
+export PATH="/usr/local/bin:/usr/local/opt:/usr/local/Cellar:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
 # export dotfiles=$HOME/dotfiles
 # export ZSH=$dotfiles/zsh
 export FZF_BASE="$HOME/.vim/bundle/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PYTHONPATH="~/Documents/Programming/UF_Research:$PYTHONPATH"
+export PYTHONPATH="$HOME/Documents/Programming/uf_research/"
 
 ZSH_THEME="dracula"
 DEFAULT_USER=`whoami`

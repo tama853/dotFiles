@@ -53,6 +53,6 @@ tm_battery="#(~/.dotfiles/bin/battery_indicator.sh)"
 tm_date="#[fg=$tm_color_active] %R %d %b"
 tm_host="#[fg=$tm_color_feature,bold]#h"
 tm_session_name="#[fg=$tm_color_feature,bold]#S"
-
+tm_session= "#[fg=$tm_color_active] %{ObsessionStatus()}"
 set -g status-left $tm_session_name' '
-set -g status-right $tm_tunes' '$tm_date' '$tm_host
+set -g status-right $tm_session' '$tm_tunes' '$tm_date' '$tm_host
