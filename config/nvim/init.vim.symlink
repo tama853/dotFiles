@@ -61,7 +61,7 @@ set mat=2					" how many tenths of a second to blink
 
 " Tab control
 set textwidth=120
-set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " insert spaces rather than tabs for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
@@ -105,8 +105,7 @@ set mouse=a
 set backspace=indent,eol,start
 set clipboard=unnamed
        
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
+let g:python3_host_prog = '/tools/Intel/python/intelpython3/bin/python3.6'
 
 "this may not be needed using tmux alias
 if &term =~ '256color'
