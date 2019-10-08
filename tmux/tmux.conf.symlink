@@ -14,7 +14,7 @@ set -g renumber-windows on
 unbind C-b
 unbind C-a
 set -g prefix C-a
-bind C-a send-prefix
+bind-key C-a send-prefix
 
 # for nested tmux sessions
 bind-key a send-prefix

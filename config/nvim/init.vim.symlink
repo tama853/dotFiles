@@ -45,6 +45,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='onedark'
 let g:bufferline_echo = 0										
 "###General###
+set ruler
 set history=1000
 set wrapmargin=8			" wrap lines when coming within n characters from side
 set linebreak				" set soft wrapping
@@ -67,7 +68,7 @@ set mat=2					" how many tenths of a second to blink
 
 " Tab control
 set textwidth=120
-set expandtab " insert spaced rather than tabs for <Tab>
+set expandtab " insert spaces rather than tabs for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
@@ -102,8 +103,8 @@ set t_vb=
 set tm=500
 							
 " toggle invisible characters
-"set list
-"set listchars=tab:→\ ,eol:¬,trail:·,extends:❯,precedes:❮,nbsp:+
+set list
+set listchars=tab:→\ ,eol:¬,trail:·,extends:❯,precedes:❮,nbsp:+
 set showbreak=↪
 set wrap
 set encoding=utf-8
@@ -138,10 +139,10 @@ let mapleader = ','
 nnoremap <Leader>, <C-w>
 
 " Faster page scolling
-nnoremap <C-e> 5<C-e>
-nnoremap <C-y> 5<C-y>
-nnoremap <C-u> 5<C-u>
-nnoremap <C-d> 5<C-d>
+nnoremap <C-e> 30<C-e>
+" nnoremap <C-y> 10<C-y>
+nnoremap <C-u> 30<C-y>
+" nnoremap <C-d> 5<C-d>
 
 nnoremap <Leader><C-s> :wa <CR>
 "noremap <C-I><C-I> :wa <CR> tab version of saving
@@ -179,7 +180,41 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" Neovim settings to set up fzf window using a Vim command
+"let g:fzf_layout = { 'window': 'enew' }
+"let g:fzf_layout = { 'window': '-tabnew' }
+"let g:fzf_layout = { 'window': '10new' }
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+" let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
 let g:tmux_navigator_no_mappings = 1
+
+" Customize fzf colors to match your color scheme
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
 nnoremap <silent> {<C-w>Left} :TmuxNavigateLeft<cr>
 nnoremap <silent> {<C-w>Down} :TmuxNavigateDown<cr>
 nnoremap <silent> {<C-w>Up} :TmuxNavigateUp<cr>
@@ -198,7 +233,8 @@ set directory=~/.vim/_swap/      " where to put swap files.
 "Syntastic stuff##########                                             |
 "#######################################################################
 set statusline+=%#warningmsg#
-set statusline+=%*
+"set statusline+=%*
+set statusline+=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 " YouCompleteMe settings                                                        
 let g:ycm_collect_identifiers_from_comments_and_strings = 0                                                     
@@ -241,6 +277,7 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 "  let g:onedark_terminal_italics=1
 "  colorscheme onedark
 "endif
+
 syntax on
 filetype plugin indent on
 colorscheme onedark

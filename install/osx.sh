@@ -9,17 +9,11 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # echo "show hidden files by default"
 defaults write com.apple.Finder AppleShowAllFiles -bool false
 
-# echo "only use UTF-8 in Terminal.app"
-defaults write com.apple.terminal StringEncodings -array 4
-
 # echo "expand save dialog by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 # echo "show the ~/Library folder in Finder"
 chflags nohidden ~/Library
-
-# echo "disable resume system wide"
-# defaults write NSGlobalDomainNSQuitAlwaysKeepWindows -bool false
 
 echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
@@ -53,10 +47,10 @@ defaults write com.apple.dock autohide -bool true
 #defaults write com.apple.finder QuitMenuItem -bool true
 
 # Disable window animations and Get Info animations in Finder
-# defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.finder DisableAllAnimations -bool true
 
-echo "Use current directory as default search scope in Finder"
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+# echo "Use current directory as default search scope in Finder"
+# defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 echo "Show Path bar in Finder"
 defaults write com.apple.finder ShowPathbar -bool true
@@ -83,7 +77,7 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # defaults write com.apple.dock show-process-indicators -bool true
 
 # Don’t animate opening applications from the Dock
-# defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock launchanim -bool false
 
 #echo "Display ASCII control characters using caret notation in standard text views"
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
@@ -102,7 +96,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 #defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable opening and closing window animations
-# defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 # echo "Disable disk image verification"
 # defaults write com.apple.frameworks.diskimages skip-verify -bool true
@@ -123,14 +117,14 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # echo "Avoid creating .DS_Store files on network volumes"
 # defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# echo "Disable the warning when changing a file extension"
-# defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+echo "Disable the warning when changing a file extension"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # echo "Show item info below desktop icons"
 # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 
-# echo "Enable snap-to-grid for desktop icons"
-# /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+echo "Enable snap-to-grid for desktop icons"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # echo "Disable the warning before emptying the Trash"
 # defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -163,9 +157,6 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 # echo "Add a context menu item for showing the Web Inspector in web views"
 # defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-#echo "Only use UTF-8 in Terminal.app"
-#defaults write com.apple.terminal StringEncodings -array 4
 
 # echo "Disable the Ping sidebar in iTunes"
 # defaults write com.apple.iTunes disablePingSidebar -bool true
@@ -204,7 +195,7 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 #Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 # Commented out, as this is known to cause problems when saving files in Adobe Illustrator CS5 :(
-#echo "0x08000100:0" > ~/.CFUserTextEncoding
+echo "0x08000100:0" > ~/.CFUserTextEncoding
 
 echo "Kill affected applications"
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done

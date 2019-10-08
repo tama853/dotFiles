@@ -316,7 +316,7 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "v",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -338,7 +338,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "s",
+                                    "key_code": "x",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -360,7 +360,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "c",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_command"
@@ -373,6 +373,28 @@
                                 "to": [
                                     {
                                         "key_code": "i",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash",
                                         "modifiers": [
                                             "left_command"
                                         ]

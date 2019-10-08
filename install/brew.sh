@@ -2,14 +2,17 @@
 
 if test ! "$( which brew )"; then
     echo "Installing homebrew"
-    ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
+    /usr/bin/ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
 fi
 
 echo -e "\\n\\nInstalling homebrew packages..."
 echo "=============================="
 
 formulas=(
+    angular-cli
     bash-completion
+    cmake
+    ctags
     git
     gcc
     gdb
@@ -17,16 +20,23 @@ formulas=(
     htop
     hydra
     markdown
-    neovim/neovim/neovim
+    macvim
+    neovim
     node
     python
+    p7zip
+    pyenv
+    python
+    ripgrep
     reattach-to-user-namespace
+    sshfs
     tmux
+    tomcat
     tree
     wget
     vim
     zsh
-    ripgrep
+    zsh-completions
 )
 
 for formula in "${formulas[@]}"; do

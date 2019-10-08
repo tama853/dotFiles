@@ -1,12 +1,15 @@
-export PATH="/usr/local/bin:/usr/local/opt:/usr/local/Cellar:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:"
 # export dotfiles=$HOME/dotfiles
 # export ZSH=$dotfiles/zsh
+export PATH="/usr/local/bin:/usr/local/opt:/usr/local/opt/python/libexec/bin:/usr/local/Cellar:/.cargo/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 export FZF_BASE="$HOME/.vim/bundle/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PYTHONPATH="$HOME/Documents/Programming/uf_research/"
 
 ZSH_THEME="dracula"
+DRACULA_DISPLAY_TIME=1
+DRACULA_DISPLAY_CONTEXT=1
+DRACULA_ARROW_ICON="-> "
+DRACULA_GIT_NOLOCK=0
 DEFAULT_USER=`whoami`
 
 # OH_MY_ZSH Plugins
@@ -14,29 +17,33 @@ plugins=(
   fzf
   git
   osx
-  vi-mode
 )
 
+# vi-mode currently not using it
+#
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 
 # add /usr/local/sbin
-if [[ -d /usr/local/sbin ]]; then
-    export PATH=/usr/local/sbin:$PATH
-fi
+# if [[ -d /usr/local/sbin ]]; then
+#    export PATH=/usr/local/sbin:$PATH
+# fi
 
 # add extra bin scripts
-export PATH=$dotfiles/bin:$PATH
+# export PATH=$dotfiles/bin:$PATH
 
 export EDITOR='nvim'
 export GIT_EDITOR='nvim'
 
 #########################################--ALIASES--###############################
 alias programming='cd ~/Documents/Programming'
-alias cc='gcc-8'
-alias gcc='gcc-8'
-alias g++='g++-8'
-alias c++='c++-8'
+alias cc='gcc-9'
+alias gcc='gcc-9'
+
+# grep alias
+alias grep='ggrep'
+alias fgrep='gfgrep'
+alias egrep='gegrep'
 
 alias dropbox='cd ~/Dropbox'
 
@@ -52,7 +59,6 @@ alias brew_update='brew update && brew upgrade && brew cleanup; brew doctor'
 #####################################################################################
 
 ### FZF ###
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 #export PATH=/usr/local/Cellar/mysql/8.0.12/bin:$PATH
 
 # define default options
