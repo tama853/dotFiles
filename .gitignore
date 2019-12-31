@@ -1,6 +1,7 @@
 .netrwhist
 npm-debug.log
-
+.DS_Store
+*/.DS_Store
 plug.vim.old
 
 config/nvim/spell
