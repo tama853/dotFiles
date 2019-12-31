@@ -1,7 +1,7 @@
 # export dotfiles=$HOME/dotfiles
 # export ZSH=$dotfiles/zsh
 export PATH="/usr/local/bin:/usr/local/opt:/usr/local/opt/python/libexec/bin:/usr/local/Cellar:/.cargo/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export FZF_BASE="$HOME/.vim/bundle/fzf"
+export FZF_BASE="$HOME/.vim/plugged/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
 export PYTHONPATH="$HOME/Documents/Programming/uf_research/"
 
@@ -17,6 +17,7 @@ plugins=(
   fzf
   git
   osx
+  vi-mode
 )
 
 # vi-mode currently not using it
@@ -46,11 +47,10 @@ alias fgrep='gfgrep'
 alias egrep='gegrep'
 
 alias dropbox='cd ~/Dropbox'
+alias clang++='clang++ -Wall -std=c++11 -stdlib=libc++'
 
-alias clang='clang++ -std=c++11 -stdlib=libc++'
-
-alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
-alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
+#alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
+#alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
 
 #  alias tmux='tmux -2'
 alias ctags="`brew --prefix`/bin/ctags"
@@ -84,14 +84,14 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 ### Functions ###
 # list directory after cd into it
-function cd()
-{
-    new_directory="$*";
-    if [ $# -eq 0 ]; then
-        new_directory=${HOME};
-    fi;
-    builtin cd "${new_directory}" && ls -G
-}
+#function cd()
+#{
+#    new_directory="$*";
+#    if [ $# -eq 0 ]; then
+#        new_directory=${HOME};
+#    fi;
+#    builtin cd "${new_directory}" && ls -G
+#}
 
 #Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -110,4 +110,6 @@ eval "$(pyenv init -)"
 ####################################################
 fpath=(/usr/local/share/zsh-completions $fpath)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
