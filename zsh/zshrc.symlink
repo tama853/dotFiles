@@ -17,7 +17,8 @@ plugins=(
   fzf
   git
   osx
-  vi-mode
+  #vi-mode
+  zsh-vim-mode
 )
 
 # vi-mode currently not using it
@@ -81,6 +82,7 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # shortcut to open FZF with selection result
 # bindkey -s '^p' 'vim $(fzf)\n'
+bindkey -v
 
 ### Functions ###
 # list directory after cd into it
