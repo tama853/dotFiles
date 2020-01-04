@@ -84,6 +84,10 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 # bindkey -s '^p' 'vim $(fzf)\n'
 bindkey -v
 
+# use Ctrl-s within terminal without freezing output
+bindkey -r '\C-s'
+stty -ixon
+
 ### Functions ###
 # list directory after cd into it
 #function cd()

@@ -7,32 +7,34 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.vim/plugged/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'scrooloose/nerdtree'  
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+
 Plug 'tpope/vim-fugitive' 
-Plug 'bling/vim-bufferline'
+Plug 'preservim/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
-Plug 'preservim/nerdcommenter'
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Theme
-Plug 'nicknisi/vim-base16-lightline'
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/tpope/vim-obsession'
 Plug 'itchyny/lightline.vim'
+Plug 'nicknisi/vim-base16-lightline'
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
+
+" align to any character :Tab /<some character>
+Plug 'godlygeek/tabular'
 
 " note taking stored on github
 "Plug 'vimwiki/vimwiki'
 
-" align to any character :Tab /<some character>
-Plug 'godlygeek/tabular'
 
 " Sytax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -42,15 +44,56 @@ call plug#end()
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 let g:onedark_hide_endofbuffer = 1
-let g:lightline = {'colorscheme': 'base16'}
+" let g:lightline = {'colorscheme': 'base16'}
+let g:lightline = {
+            \   'colorscheme': 'base16',
+            \   'active': {
+            \       'left': [ [ 'mode', 'paste' ],
+            \               [ 'gitbranch' ],
+            \               [ 'readonly', 'filetype', 'filename' ]],
+            \       'right': [ [ 'percent' ], [ 'lineinfo' ],
+            \               [ 'fileformat', 'fileencoding' ],
+            \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \   },
+            \   'component_expand': {
+            \   },
+            \   'component_type': {
+            \       'readonly': 'error',
+            \       'linter_warnings': 'warning',
+            \       'linter_errors': 'error'
+            \   },
+            \   'component_function': {
+            \       'fileencoding': 'helpers#lightline#fileEncoding',
+            \       'filename': 'helpers#lightline#fileName',
+            \       'fileformat': 'helpers#lightline#fileFormat',
+            \       'filetype': 'helpers#lightline#fileType',
+            \       'gitbranch': 'helpers#lightline#gitBranch',
+            \       'cocstatus': 'coc#status',
+            \       'currentfunction': 'helpers#lightline#currentFunction',
+            \       'gitblame': 'helpers#lightline#gitBlame'
+            \   },
+            \   'tabline': {
+            \       'left': [ [ 'tabs' ] ],
+            \       'right': [ [ 'close' ] ]
+            \   },
+            \   'tab': {
+            \       'active': [ 'filename', 'modified' ],
+            \       'inactive': [ 'filename', 'modified' ],
+            \   },
+            \   'separator': { 'left': '', 'right': '' },
+            \   'subseparator': { 'left': '', 'right': '' }
+        \ }
 
 if has("gui_macvim")
 set guifont=Operator\ Mono\ Medium:h15
 endif
 
 " status line
-set statusline+=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
-let g:bufferline_echo = 0										
+" set statusline+=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 
 "###General###
 set ruler
@@ -144,15 +187,15 @@ endif
 
 "###Keybindings###
 let mapleader = ','
-"nnoremap <Leader>, <C-w>
+nnoremap <Leader>, <C-w>
 
 " Faster page scolling
-nnoremap <C-e> 30<C-e>
-nnoremap <C-u> 30<C-u>
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 " save buffer
-nnoremap <Leader><C-s> :wa <CR>
-"noremap <C-I><C-I> :wa <CR> tab version of saving
+nnoremap <Leader><C-s> :w<CR>
+"noremap <C-I><C-I> :w<CR> tab version of saving
 
 " tagbar and nerdtree shortcuts
 nnoremap <Leader>~ :TagbarToggle<CR>
@@ -162,40 +205,52 @@ nnoremap <Leader>` :NERDTreeToggle<CR>
 nnoremap <Leader><C-r> :term python % <CR>
 nnoremap <Leader><C-w> :bd! <CR>
 
-nnoremap <Leader>a :buffers<CR>:buffer<Space>
+" switch between current and last buffer
+nnoremap <Leader>l <c-^>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>g :e#<CR>
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
 
-nnoremap <C-p> :Rg<Cr>
-nnoremap <C-F> :Files<Cr>
+
+nnoremap <Leader>p :Rg<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>b :Buffer<CR>
+nnoremap <Leader>t :Tag<CR>
+
+" move line mappings
+" ∆ is <A-j> on macOS
+" ˚ is <A-k> on macOS
+nnoremap <C-A-j> :m .+1<cr>==
+nnoremap <C-A-k> :m .-2<cr>==
+inoremap <C-A-j> <Esc>:m .+1<cr>==gi
+inoremap <C-A-k> <Esc>:m .-2<cr>==gi
+vnoremap <C-A-j> :m '>+1<cr>gv=gv
+vnoremap <C-A-k> :m '<-2<cr>gv=gv
+
+" use rg for vimgrep
 set grepprg=rg\ --vimgrep
 
-" replace highlighted words
-nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
+" set paste toggle
+set pastetoggle=<leader>v
+
+" edit ~/.config/nvim/init.vim
+nnoremap <Leader>conf :e! ~/.vimrc<cr>
+
+" close NERDTree if only buffer left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" replace highlighted words (not needed when using coc.nvim)
+" nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Remap for rename current word (using coc.nvim)
+nmap <leader>rw <Plug>(coc-rename)
 
 " helps avoid an error with gitgutter
 let g:gitgutter_git_executable = '/usr/local/bin/git'
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-" Neovim settings to set up fzf window using a Vim command
-"let g:fzf_layout = { 'window': 'enew' }
-"let g:fzf_layout = { 'window': '-tabnew' }
-"let g:fzf_layout = { 'window': '10new' }
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
@@ -214,7 +269,6 @@ set undolevels=1000
 set undoreload=10000
 
 set undodir=~/.vim/_undo         " where to save undo histories
-"set backupdir=~/.vim/_backup/    " where to put backup files.
 set nobackup
 set nowritebackup
 set directory=~/.vim/_swap/      " where to put swap files.
@@ -232,7 +286,7 @@ endfunction
 " file, and we're not in vimdiff
 function! SyncTree()
   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
+      NERDTreeFind
     wincmd p
   endif
 endfunction
@@ -240,6 +294,7 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
+let g:NERDTreeIgnore = ['^node_modules$']
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 " disables uncommon file types to reduce lag
@@ -261,7 +316,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
@@ -304,6 +359,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -342,14 +398,13 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+au CursorHold * sil call CocActionAsync('highlight')
+au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -386,9 +441,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
@@ -437,6 +489,9 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" make vim select first item on completion
+"suggest.noselect": false
 
 
 " Colorscheme and final setup
