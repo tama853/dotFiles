@@ -1,4 +1,8 @@
 {
+    "suggest.noselect": false,
+    "snippets.extends": {
+        "cpp": ["c"]
+    },
     "languageserver": {
         "ccls": {
             "command": "ccls",

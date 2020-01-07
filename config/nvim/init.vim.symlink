@@ -53,7 +53,7 @@ let g:lightline = {
             \               [ 'readonly', 'filetype', 'filename' ]],
             \       'right': [ [ 'percent' ], [ 'lineinfo' ],
             \               [ 'fileformat', 'fileencoding' ],
-            \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \               [ 'gitblame', 'currentfunction', 'cocstatus', 'linter_errors', 'linter_warnings' ]]
             \   },
             \   'component_expand': {
             \   },
@@ -94,7 +94,6 @@ endif
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-
 "###General###
 set ruler
 set history=1000
@@ -112,7 +111,7 @@ set showcmd					" show incomplete commands
 set noshowmode				" don't show which mode disabled for PowerLine
 set wildmode=list:longest	" complete files like a shell
 set shell=$SHELL
-set cmdheight=1				" command bar height
+" set cmdheight=1			" command bar height USE WITHOUT COC.NVIM
 set title					" set terminal title
 set showmatch				" show matching braces
 set mat=2					" how many tenths of a second to blink
@@ -166,7 +165,27 @@ set t_Co=256
 set mouse=a
 set backspace=indent,eol,start
 set clipboard=unnamed
-       
+
+" within .vim/
+set undofile
+set undolevels=1000
+set undoreload=10000
+
+set undodir=~/.vim/_undo         " where to save undo histories
+set nobackup
+set nowritebackup
+set directory=~/.vim/_swap/      " where to put swap files.
+
+" coc.nvim specific
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+" Better display for messages for coc.nvim
+set cmdheight=2
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 
@@ -210,21 +229,46 @@ nnoremap <Leader>l <c-^>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>n :bn<CR>
 
+nnoremap <C-p> :Rg<CR>
+nnoremap <C-f> :Files<CR>
+nnoremap <C-b> :Buffer<CR>
+nnoremap <Leader>t :Tags<CR>
 
-nnoremap <Leader>p :Rg<CR>
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>b :Buffer<CR>
-nnoremap <Leader>t :Tag<CR>
+" replace highlighted words (not needed when using coc.nvim)
+" nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Remap for rename current word (using coc.nvim)
+nmap <leader>rw <Plug>(coc-rename)
 
 " move line mappings
 " ∆ is <A-j> on macOS
 " ˚ is <A-k> on macOS
-nnoremap <C-A-j> :m .+1<cr>==
-nnoremap <C-A-k> :m .-2<cr>==
-inoremap <C-A-j> <Esc>:m .+1<cr>==gi
-inoremap <C-A-k> <Esc>:m .-2<cr>==gi
-vnoremap <C-A-j> :m '>+1<cr>gv=gv
-vnoremap <C-A-k> :m '<-2<cr>gv=gv
+nnoremap <C-M-j> :m .+1<cr>==
+nnoremap <C-M-k> :m .-2<cr>==
+inoremap <C-M-j> <Esc>:m .+1<cr>==gi
+inoremap <C-M-k> <Esc>:m .-2<cr>==gi
+vnoremap <C-M-j> :m '>+1<cr>gv=gv
+vnoremap <C-M-k> :m '<-2<cr>gv=gv
+
+let g:tmux_navigator_no_mappings = 1
+" " normal
+nnoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
+nnoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
+nnoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
+nnoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
+nnoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
+" insert
+inoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
+inoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
+inoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
+inoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
+inoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
+" visual
+vnoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
+vnoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
+vnoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
+vnoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
+vnoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
 
 " use rg for vimgrep
 set grepprg=rg\ --vimgrep
@@ -233,16 +277,10 @@ set grepprg=rg\ --vimgrep
 set pastetoggle=<leader>v
 
 " edit ~/.config/nvim/init.vim
-nnoremap <Leader>conf :e! ~/.vimrc<cr>
+" nnoremap <Leader>conf :e! ~/.vimrc<cr>
 
 " close NERDTree if only buffer left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" replace highlighted words (not needed when using coc.nvim)
-" nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
-
-" Remap for rename current word (using coc.nvim)
-nmap <leader>rw <Plug>(coc-rename)
 
 " helps avoid an error with gitgutter
 let g:gitgutter_git_executable = '/usr/local/bin/git'
@@ -263,15 +301,6 @@ let g:fzf_tags_command = 'ctags -R'
 
 " [Commands] --expect expression for directly executing the command
 " let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-
-set undofile
-set undolevels=1000
-set undoreload=10000
-
-set undodir=~/.vim/_undo         " where to save undo histories
-set nobackup
-set nowritebackup
-set directory=~/.vim/_swap/      " where to put swap files.
 
 "#######################################################################
 " NERD Syntax Highlight settings                                                         |
@@ -307,7 +336,7 @@ let g:NERDTreeLimitedSyntax = 1
 let g:NERDSpaceDelims = 1
 
 " Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
+" let g:NERDCompactSexyComs = 1
 
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
@@ -341,18 +370,6 @@ let g:coc_global_extensions = [
     \ 'coc-css'
     \ ]
 
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -368,7 +385,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -430,8 +447,8 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <C-d> <Plug>(coc-range-select)
-xmap <silent> <C-d> <Plug>(coc-range-select)
+" nmap <silent> <C-d> <Plug>(coc-range-select)
+" xmap <silent> <C-d> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -490,24 +507,7 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
-" make vim select first item on completion
-"suggest.noselect": false
-
-
-" Colorscheme and final setup
-    " This call must happen after the plug#end() call to ensure
-    " that the colorschemes have been loaded
-"if filereadable(expand("~/.vimrc_background"))
-"	let base16colorspace=256
- " source ~/.vimrc_background
-"else
-"  let g:onedark_termcolors=16
-"  let g:onedark_terminal_italics=1
-"  colorscheme onedark
-"endif
-
 colorscheme onedark
-"set background=dark
 
 " make the highlighting of tabs and other non-text less annoying
 highlight SpecialKey ctermfg=19
