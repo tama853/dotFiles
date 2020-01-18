@@ -14,14 +14,14 @@ set -g renumber-windows on
 unbind C-b
 unbind C-a
 set -g prefix C-a
-bind C-a send-prefix
+bind-key C-a send-prefix
 
 # for nested tmux sessions
 bind-key a send-prefix
 
 # Activity Monitoring
-setw -g monitor-activity off
-set -g visual-activity off
+setw -g monitor-activity on
+set -g visual-activity on
 
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
@@ -58,7 +58,7 @@ set-option -g set-titles-string "#T - #W"
 bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
 
 # split window and fix path for tmux 1.9
-bind \ split-window -h -c "#{pane_current_path}"
+bind \\ split-window -h -c "#{pane_current_path}"
 bind - split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
@@ -66,37 +66,31 @@ unbind %
 # synchronize all panes in a window
 #bind y setw synchronize-panes
 
-# pane movement shortcuts
-# switch panes using Alt-arrow without prefix
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
-# Resize pane shortcuts
-#bind -r H resize-pane -L 10
-#bind -r T resize-pane -D 10
-#bind -r C resize-pane -U 10
-#bind -r N resize-pane -R 10
-
 unbind p
 bind -r b select-window -t :-
 bind -r n select-window -t :+
 
-# smart pane switching with awareness of Vim splits.
+
+# Smart pane switching with awareness of Vim splits.
 # See: https://github.com/christoomey/vim-tmux-navigator
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-bind-key -n C-S-Left if-shell "$is_vim" "send-keys <C-w>Left"  "select-pane -L"
-bind-key -n C-S-Down if-shell "$is_vim" "send-keys <C-w>Down"  "select-pane -D"
-bind-key -n C-S-Up if-shell "$is_vim" "send-keys <C-w>Up"  "select-pane -U"
-bind-key -n C-S-Right if-shell "$is_vim" "send-keys <C-w>Right"  "select-pane -R"
-bind-key -n C-S-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
-#bind-key -T copy-mode-vi C-h select-pane -L
-#bind-key -T copy-mode-vi C-t select-pane -D
-#bind-key -T copy-mode-vi C-c select-pane -U
-#bind-key -T copy-mode-vi C-n select-pane -R
-#bind-key -T copy-mode-vi C-\ select-pane -l
+bind-key -n 'M-h' if-shell "$is_vim" 'send-keys M-h'  'select-pane -L'
+bind-key -n 'M-j' if-shell "$is_vim" 'send-keys M-j'  'select-pane -D'
+bind-key -n 'M-k' if-shell "$is_vim" 'send-keys M-k'  'select-pane -U'
+bind-key -n 'M-l' if-shell "$is_vim" 'send-keys M-l'  'select-pane -R'
+tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
+if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+
+bind-key -T copy-mode-vi 'M-h' select-pane -L
+bind-key -T copy-mode-vi 'M-j' select-pane -D
+bind-key -T copy-mode-vi 'M-k' select-pane -U
+bind-key -T copy-mode-vi 'M-l' select-pane -R
+bind-key -T copy-mode-vi 'M-\' select-pane -l
+
 
 # set vi mode for copy mode
 setw -g mode-keys vi
@@ -105,8 +99,8 @@ setw -g mode-keys vi
 #bind Escape copy-mode
 unbind p
 bind p paste-buffer
-#bind -Tcopy-mode-vi 'v' send -X begin-selection
-#bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind -Tcopy-mode-vi 'v' send -X begin-selection
+bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-selection
 
@@ -124,14 +118,31 @@ bind-key t new-window
 
 # q to kill session
 unbind q # I don't like having this power
-#bind-key q kill-session
+bind-key q kill-session
 
-set -g default-shell /usr/bin/zsh
-set -g default-command /usr/bin/zsh
+set -g default-shell /usr/local/bin/zsh
+set -g default-command /usr/local/bin/zsh
 
 #############################
 ###Color & Style Settings ###
 #############################
+set -g @resurrect-save-shell-history 'on'
+set -g @resurrect-capture-pane-contents 'on'
+
+# for vim
+set -g @resurrect-strategy-vim 'session'
+# for neovim
+set -g @resurrect-strategy-nvim 'session'
 
 source ~/dotfiles/tmux/theme.sh
-#source ~/dotfiles/tmux/base16.sh
+# source ~/dotfiles/tmux/base16.sh
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'christoomey/vim-tmux-navigator'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
+

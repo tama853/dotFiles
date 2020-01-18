@@ -1,8 +1,8 @@
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/home/tama853/intelFPGA_lite/18.1/quartus/bin:/home/tama853/intelFPGA_lite/18.1/modelsim_ase/linuxaloem"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/home/michael/intelFPGA_lite/18.1/quartus/bin:/home/michael/intelFPGA_lite/18.1/modelsim_ase/linuxaloem"
 export ZSH=$DOTFILES/zsh
 export DOTFILES=$HOME/.dotfiles
-export FZF_BASE="$HOME/.vim/bundle/fzf"
-export ZSH="/home/tama853/.oh-my-zsh"
+export FZF_BASE="$HOME/.vim/plugged/fzf/"
+export ZSH="/home/michael/.oh-my-zsh"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ZSH_THEME="dracula"
