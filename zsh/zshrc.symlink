@@ -18,12 +18,43 @@ plugins=(
   fzf
   git
   osx
-  #vi-mode
   #zsh-vim-mode
 )
 
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
+
+# make terminal command navigation sane again
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[[5D' beginning-of-line
+bindkey '^[[5C' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^?' backward-delete-char
+bindkey "^A" vi-beginning-of-line
+
+# add color to man pages
+export MANROFFOPT='-c'
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+
+# Helpers
+alias grep='grep --color=auto'
+alias df='df -h' # disk free, in Gigabytes, not bytes
+alias du='du -h -c' # calculate disk usage for a folder
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# remove broken symlinks
+alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
 # add extra bin scripts
 export PATH=$DOTFILES/bin:$PATH
@@ -49,7 +80,7 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # shortcut to open FZF with selection result
-# bindkey -s '^p' 'vim $(fzf)\n'
+#bindkey -s '^p' 'nvim $(fzf)\n'
 bindkey -v
 
 # use Ctrl-s within terminal without freezing output
@@ -57,15 +88,16 @@ bindkey -r '\C-s'
 stty -ixon
 
 #Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export TERM=xterm
-else
+# if [[ -n $SSH_CONNECTION ]]; then
+#     export TERM=xterm
+# else
 	if [ -z "$TMUX" ]; then
 		export TERM=xterm-256color-italic
 	else
+        #export TERM=tmux-256color maybe use this if tmux isn't working
 		export TERM=tmux-256color-italic
 	fi
-fi
+# fi
 
 ####################################################
 

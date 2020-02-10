@@ -35,7 +35,6 @@ Plug 'godlygeek/tabular'
 " note taking stored on github
 "Plug 'vimwiki/vimwiki'
 
-
 " Sytax
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
@@ -83,10 +82,6 @@ let g:lightline = {
             \   'separator': { 'left': '', 'right': '' },
             \   'subseparator': { 'left': '', 'right': '' }
         \ }
-
-if has("gui_macvim")
-set guifont=Operator\ Mono\ Medium:h15
-endif
 
 " status line
 " set statusline+=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
@@ -172,9 +167,9 @@ set undolevels=1000
 set undoreload=10000
 
 set undodir=~/.vim/_undo         " where to save undo histories
+set directory=~/.vim/_swap/      " where to put swap files.
 set nobackup
 set nowritebackup
-set directory=~/.vim/_swap/      " where to put swap files.
 
 " coc.nvim specific
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -205,6 +200,7 @@ if (has("termguicolors"))
 endif
 
 "###Keybindings###
+inoremap jk <esc>
 let mapleader = ','
 nnoremap <Leader>, <C-w>
 
@@ -251,24 +247,11 @@ vnoremap <C-M-j> :m '>+1<cr>gv=gv
 vnoremap <C-M-k> :m '<-2<cr>gv=gv
 
 let g:tmux_navigator_no_mappings = 1
-" " normal
-nnoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
-nnoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
-nnoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
-nnoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
-nnoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
-" insert
-inoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
-inoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
-inoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
-inoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
-inoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
-" visual
-vnoremap <silent> {<M-h>} :TmuxNavigateLeft<cr>
-vnoremap <silent> {<M-j>} :TmuxNavigateDown<cr>
-vnoremap <silent> {<M-k>} :TmuxNavigateUp<cr>
-vnoremap <silent> {<M-l>} :TmuxNavigateRight<cr>
-vnoremap <silent> {<M-\\>} :TmuxNavigatePrevious<cr>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-\\> :TmuxNavigatePrevious<cr>
 
 " use rg for vimgrep
 set grepprg=rg\ --vimgrep
@@ -345,7 +328,8 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+"
+let g:NERDCustomDelimiters = { 'c': { 'left': '//'} }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
