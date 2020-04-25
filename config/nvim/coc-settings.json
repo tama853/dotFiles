@@ -1,1 +1,56 @@
-/home/michael/.config/nvim/coc-settings.json
+{
+    "suggest.noselect": false,
+    "snippets.extends": {
+        "cpp": ["c"]
+    },
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                ".ccls-root",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                },
+                "gcc": {
+                    "resourceDir": "/usr/lib/gcc/x86_64-linux-gnu/7/include",
+                    "extraArgs": [
+                        "-isystem",
+                        "/usr/local/include",
+                        "-isystem",
+                        "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed",
+                        "-iststem",
+                        "/usr/include/x86_64-linux-gnu",
+                        "-iststem",
+                        "/usr/include"
+                    ]
+                },
+                "g++": {
+                    "resourceDir": "/usr/lib/gcc/x86_64-linux-gnu/7/include",
+                    "extraArgs": [
+                        "-isystem",
+                        "/usr/local/include",
+                        "-isystem",
+                        "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed",
+                        "-iststem",
+                        "/usr/include/x86_64-linux-gnu",
+                        "-iststem",
+                        "/usr/include"
+                    ]
+                }
+            }
+        }
+    }
+}
