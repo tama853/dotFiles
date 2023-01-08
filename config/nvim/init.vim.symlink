@@ -8,14 +8,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.vim/plugged/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/nerdtree'  
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-gitgutter'
-
-Plug 'tpope/vim-fugitive' 
-Plug 'preservim/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-repeat.git'
@@ -23,7 +15,6 @@ Plug 'https://github.com/tpope/vim-repeat.git'
 
 " Theme
 Plug 'https://github.com/majutsushi/tagbar'
-Plug 'https://github.com/tpope/vim-obsession'
 Plug 'itchyny/lightline.vim'
 Plug 'nicknisi/vim-base16-lightline'
 Plug 'chriskempson/base16-vim'
@@ -37,7 +28,6 @@ Plug 'godlygeek/tabular'
 
 
 " Sytax
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 "###Theme Stuff###
@@ -53,7 +43,7 @@ let g:lightline = {
             \               [ 'readonly', 'filetype', 'filename' ]],
             \       'right': [ [ 'percent' ], [ 'lineinfo' ],
             \               [ 'fileformat', 'fileencoding' ],
-            \               [ 'gitblame', 'currentfunction', 'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \               [ 'gitblame', 'currentfunction', 'linter_errors', 'linter_warnings' ]]
             \   },
             \   'component_expand': {
             \   },
@@ -68,7 +58,6 @@ let g:lightline = {
             \       'fileformat': 'helpers#lightline#fileFormat',
             \       'filetype': 'helpers#lightline#fileType',
             \       'gitbranch': 'helpers#lightline#gitBranch',
-            \       'cocstatus': 'coc#status',
             \       'currentfunction': 'helpers#lightline#currentFunction',
             \       'gitblame': 'helpers#lightline#gitBlame'
             \   },
@@ -91,9 +80,6 @@ endif
 " status line
 " set statusline+=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 "###General###
 set ruler
 set history=1000
@@ -102,7 +88,7 @@ set linebreak				" set soft wrapping
 set showbreak=…				" show ellipsis at breaking
 set autoindent				" automatically set indent of new line
 set ttyfast					" faster redrawing
-set diffopt+=vertical
+"set diffopt+=vertical
 set laststatus=2			" show the status line all the time:set nostartofline
 set scrolloff=7				" set 7 lines to the cursors - when moving vertical
 set wildmenu				" enhanced command line completion
@@ -176,16 +162,6 @@ set nobackup
 set nowritebackup
 set directory=~/.vim/_swap/      " where to put swap files.
 
-" coc.nvim specific
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-" Better display for messages for coc.nvim
-set cmdheight=2
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes
-
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 
@@ -207,6 +183,9 @@ endif
 "###Keybindings###
 let mapleader = ','
 nnoremap <Leader>, <C-w>
+
+" commenting
+nnoremap <Leader>/ :s!^!#!<CR>
 
 " Faster page scolling
 nnoremap <C-e> 3<C-e>
@@ -233,12 +212,6 @@ nnoremap <C-p> :Rg<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <C-b> :Buffer<CR>
 nnoremap <Leader>t :Tags<CR>
-
-" replace highlighted words (not needed when using coc.nvim)
-" nnoremap <Leader>rw :%s/\<<C-r><C-w>\>//g<Left><Left>
-
-" Remap for rename current word (using coc.nvim)
-nmap <leader>rw <Plug>(coc-rename)
 
 " move line mappings
 " ∆ is <A-j> on macOS
@@ -279,12 +252,6 @@ set pastetoggle=<leader>v
 " edit ~/.config/nvim/init.vim
 " nnoremap <Leader>conf :e! ~/.vimrc<cr>
 
-" close NERDTree if only buffer left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" helps avoid an error with gitgutter
-let g:gitgutter_git_executable = '/usr/local/bin/git'
-
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -297,7 +264,7 @@ let g:fzf_buffers_jump = 1
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 " [Tags] Command to generate tags file
-let g:fzf_tags_command = 'ctags -R'
+let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=env'
 
 " [Commands] --expect expression for directly executing the command
 " let g:fzf_commands_expect = 'alt-enter,ctrl-x'
@@ -355,157 +322,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
-
-"#######################################################################
-" Coc settings                                                         |
-" ######################################################################
-
-let g:coc_global_extensions = [
-    \ 'coc-snippets',
-    \ 'coc-pairs',
-    \ 'coc-json',
-    \ 'coc-python',
-    \ 'coc-java',
-    \ 'coc-html',
-    \ 'coc-css'
-    \ ]
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <C-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-au CursorHold * sil call CocActionAsync('highlight')
-au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
-
-" Remap for format selected region
-xmap <leader>fm  <Plug>(coc-format-selected)
-nmap <leader>fm  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-" nmap <silent> <C-d> <Plug>(coc-range-select)
-" xmap <silent> <C-d> <Plug>(coc-range-select)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-" #####################################################################
-"
-" Coc Snippets
-" Use <C-l> for trigger snippet expand.
-imap <Leader><C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <Leader><C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<Leader><c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<Leader><c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <Leader><C-j> <Plug>(coc-snippets-expand-jump)
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
 
 colorscheme onedark
 

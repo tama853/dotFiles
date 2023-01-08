@@ -3,7 +3,7 @@
 export PATH="/usr/local/bin:/usr/local/opt:/usr/local/opt/python/libexec/bin:/usr/local/Cellar:/.cargo/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 export FZF_BASE="$HOME/.vim/plugged/fzf"
 export ZSH="/Users/tama853/.oh-my-zsh"
-export PYTHONPATH="$HOME/Documents/Programming/uf_research/"
+#export PYTHONPATH="$HOME/Documents/Programming/uf_research/"
 
 ZSH_THEME="dracula"
 DRACULA_DISPLAY_TIME=1
@@ -16,7 +16,7 @@ DEFAULT_USER=`whoami`
 plugins=(
   fzf
   git
-  osx
+  macos
   #vi-mode
   zsh-vim-mode
 )
